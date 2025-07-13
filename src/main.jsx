@@ -1,10 +1,13 @@
-import { StrictMode } from 'react'
+//import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import './index.css'
 import App from './App.jsx'
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+// Products
+import PageProduct from '@feature/products/page/PageProduct'
+import NewProduct from '@feature/products/components/NewProduct'
+import EditProduct from '@feature/products/components/EditProduct'
 
 const router = createBrowserRouter([
   {
@@ -14,10 +17,24 @@ const router = createBrowserRouter([
         {
           index: true,
           element: <h1>Hi! I'm Index</h1>,
+        },
+        {
+          path:'/PageProduct',
+          Component: PageProduct , 
+        },
+        {
+          path:'/PageProduct/new',
+          Component: NewProduct , 
+        },
+        {
+          path:'/PageProduct/:id/edit',
+          Component: EditProduct , 
         }
+        
       ]
   }
 ])
+
 createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />
 )

@@ -9,6 +9,8 @@ export default defineConfig({
     alias:{
       "@": path.resolve(__dirname, "./src"), // each time we're writing down "@" -> watch the file "src"
       "@feature": path.resolve(__dirname, "./src/feature/"),
+      "@products": path.resolve(__dirname, "./src/feature/products"),
+      
     }
   }
 })
