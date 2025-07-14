@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form , Field , ErrorMessage} from 'formik';
 // import { useParams } from 'react-router-dom';
 import { SchemaProduct } from '../schemas/schemaProduct';
@@ -11,7 +13,16 @@ function NewProduct(){
   
   // const params = useParams();
 
-  const { handleSubmitForm } = useNewProduct();
+  const { handleSubmitForm, success } = useNewProduct();
+
+  // If everything is ok..
+  const redirect = useNavigate();
+
+  useEffect(()=>{
+    if(success){
+      redirect('/PageProduct');
+    }
+  },[success])
 
   return(
     <div>
