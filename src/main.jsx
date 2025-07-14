@@ -23,13 +23,14 @@ const router = createBrowserRouter([
           Component: PageProduct , 
         },
         {
-          path:'/PageProduct/new',
+          path:'/new-product',
           Component: NewProduct , 
         },
         {
           path:'/PageProduct/:id/edit',
           Component: EditProduct , 
-        }
+        },
+   
         
       ]
   }
