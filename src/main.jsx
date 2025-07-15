@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // Products
 import PageProduct from '@feature/products/page/PageProduct'
 import NewProduct from '@feature/products/components/NewProduct'
+import DeleteProduct from '@feature/products/components/DeleteProduct'
+//import DeleteProduct from './feature/products/components/DeleteProduct.jsx'
 
 const router = createBrowserRouter([
   {
@@ -29,7 +31,10 @@ const router = createBrowserRouter([
           path:'/PageProduct/:id/edit',
           Component: NewProduct , 
         },
-   
+        {
+          path:'/PageProduct/:id/delete',
+          Component: DeleteProduct , 
+        },
         
       ]
   }

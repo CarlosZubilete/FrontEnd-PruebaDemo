@@ -1,19 +1,21 @@
-
+import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 
 function CardProduct({product}){
 
-  const handleSelected = () => {
-    //navigate(`/digimonsPage/${digimons.name}`)
-  }
-
   return (
-    <div onClick={handleSelected} 
-      className='cardProduct'>
-      {/* <p className='instrumentCard__p'>ID: {instrument.id}</p> */}
-      <p className='cardProduct__p'><span className='cardProduct__p--span'>Name: </span>{product.name}</p>
-      <p className='cardProduct__p'><span className='cardProduct__p--span'>Price: </span>${product.price}</p>
-      <p className='cardProduct__p'><span className='cardProduct__p--span'>Category: </span>{product.category}</p>
-    </div>
+    <Card className="mb-3 shadow-sm">
+      <CardBody>
+        <CardTitle tag="h5" className="fw-bold text-primary">
+          {product.name}
+        </CardTitle>
+        <CardText>
+          <strong>Price:</strong> ${product.price}
+        </CardText>
+        <CardText>
+          <strong>Category:</strong> {product.category}
+        </CardText>
+      </CardBody>
+    </Card>
   )
 }
 

@@ -6,11 +6,17 @@ import { SchemaProduct } from '../schemas/schemaProduct';
 import useNewProduct from '../hooks/useNewProducto';
 
 const ErrorOne = ({children}) => {
-  return <span style={{fontSize:'.6rem', color:'red' , fontWeight:'bold'}}> {children} </span>
+  return <span style={{fontSize:'.6rem', color:'red' , fontWeight:'bold'}} 
+  className="container mt-5 pt-4"> 
+    {children} 
+  </span>
 }
 
 const ErrorBack = () => {
-  return <h2 style={{fontSize:'1.2rem', color:'red'}}>BackEnd says: "Error Bad Request" </h2>;
+  return <h2 style={{fontSize:'1.2rem', color:'red'}} 
+    className="container mt-5 pt-4">
+      BackEnd says: "Error Bad Request" 
+    </h2>;
 }
 
 function NewProduct(){
@@ -32,7 +38,7 @@ function NewProduct(){
   if(params?.id && product == null) return <p>Cargando...</p>
 
   return(
-    <Container className='mt-5'>
+    <Container className='className="container mt-5 pt-4"'>
       <span>{error && <ErrorBack/>}</span>
       <Row>
         <Col sm={{size:8, offset:2}}>
@@ -99,7 +105,7 @@ function NewProduct(){
                 Back
                 </Button>
               </Link>
-                
+    
             </Form>
           }  
         </Formik>

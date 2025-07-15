@@ -9,7 +9,7 @@ import productService from '../services/productService';
   const[err,setErr] = useState(false);
 
   useEffect(()=>{
-    productService.find()
+    productService.findAll()
     .then((data)=>{
       setProducts(data)
       //setProducts(Array.isArray(data) ? data : []); 

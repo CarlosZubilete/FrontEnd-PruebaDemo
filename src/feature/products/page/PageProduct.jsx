@@ -19,8 +19,7 @@ function PageProduct(){
 
   return(
       <div className="container mt-5 pt-4">
-        <hr />
-        <h2>Products List</h2>
+        <h2 className="">Products List</h2>
           <Link to="/new-product" className="text-light text-decoration-none">    
             <button type="button" className="btn btn-success mb-3">
               Add Product
