@@ -1,6 +1,8 @@
 import { Link } from 'react-router';
+// import { NavBar } from 'reactstrap';
 
-function NavBar(){
+
+function NavBar (){
   return(
     <nav className='navBar'>
       <ul className='navBar__ul'>
