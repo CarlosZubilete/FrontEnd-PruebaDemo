@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         },
         {
           path:'/PageProduct/:id/edit',
-          Component: EditProduct , 
+          Component: NewProduct , 
         },
    
         

@@ -1,5 +1,6 @@
 //import CardProduct from "./CardProduct";
 import CardProduct from "@products/components/CardProduct"
+import { Link } from 'react-router';
 
 function ListProduct({listaProductos}){
 //function ListProduct({listaProductos = [] }){
@@ -19,7 +20,9 @@ function ListProduct({listaProductos}){
               category: product.categoria,
             }} />
             <hr /> 
-            {/* <div> EDIT - VOLVER </div> */}
+          <Link to={`/PageProduct/${product.id}/edit`}>
+            <button>Edit</button>
+          </Link>
           </li>)
       }
     </ul>

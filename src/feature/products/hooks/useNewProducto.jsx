@@ -1,12 +1,14 @@
 
 
-import { useState } from "react";
+import {  useEffect, useState } from "react";
 import productService from "../services/productService";
 
 
-export default function useNewProduct(){
+
+export default function useNewProduct(id){
 
   const[success,setSuccess] = useState(false);
+  const[product,setProduct] = useState(null) // Declarate a box will fill out with product
 
   const handleSubmitForm = async (values) => {
     
@@ -30,7 +32,20 @@ export default function useNewProduct(){
       setSuccess(false); //
     }
   }
+
+
+  useEffect(()=>{   
+      if(id){
+      productService.FindById(id)  
+        .then((data) => {
+          setProduct(data);
+        })
+        .catch(() => {
+          // RETORNA un error
+        })
+    }
+  },[id])
   
-  return { handleSubmitForm ,success}
+  return { handleSubmitForm , success , product }
 
 }

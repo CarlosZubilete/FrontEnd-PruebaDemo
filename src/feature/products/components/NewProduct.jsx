@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link , useParams } from 'react-router-dom';
 import { Formik, Form , Field , ErrorMessage} from 'formik';
-// import { useParams } from 'react-router-dom';
 import { SchemaProduct } from '../schemas/schemaProduct';
 import useNewProduct from '../hooks/useNewProducto';
 
@@ -11,9 +10,9 @@ const ErrorOne = ({children}) => {
 
 function NewProduct(){
   
-  // const params = useParams();
+  const params = useParams();
 
-  const { handleSubmitForm, success } = useNewProduct();
+  const { handleSubmitForm, success , product} = useNewProduct(params.id);
 
   // If everything is ok..
   const redirect = useNavigate();
@@ -24,12 +23,19 @@ function NewProduct(){
     }
   },[success])
 
+
+  if(params?.id && product == null) return <p>Cargando...</p>
+
   return(
     <div>
       <h2>New Product</h2>
 
       <Formik 
-        initialValues={{name:'', price: 0 , category:''}}
+        initialValues={{
+          name: product?.nombre || '', 
+          price: product?.precio || 0 , 
+          category: product?.categoria || '',
+        }}
         onSubmit={handleSubmitForm} // QUERY FROM USE-HOOK
         validationSchema={SchemaProduct} // VALIDATION 
       >
@@ -55,8 +61,18 @@ function NewProduct(){
           <button type="submit"
             className='AddInstrument__button'> Send
           </button>
+
         </Form>
+
       </Formik>
+      <hr />
+      
+      <button type="submit"className='AddInstrument__button'> 
+            <Link to='/PageProduct'>
+              Back
+            </Link>
+      </button>
+      
     </div>
   ) 
 }
