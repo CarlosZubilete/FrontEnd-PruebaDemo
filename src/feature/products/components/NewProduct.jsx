@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate , Link , useParams } from 'react-router-dom';
 import { Formik, Form , Field , ErrorMessage} from 'formik';
 import { SchemaProduct } from '../schemas/schemaProduct';
+import { Container , Row , Col , Button , Label , Input , FormGroup} from 'reactstrap';
 import useNewProduct from '../hooks/useNewProducto';
 
 const ErrorOne = ({children}) => {
@@ -27,53 +28,79 @@ function NewProduct(){
   if(params?.id && product == null) return <p>Cargando...</p>
 
   return(
-    <div>
-      <h2>New Product</h2>
+    <Container className='mt-5'>
+      <Row>
+        <Col sm={{size:8, offset:2}}>
+          <hr />
+          <h3 className='font-weight-bold'>{(product?.id) ? 'Edit' : 'Add'} Producto </h3>
+          <hr />
+          <Formik 
+            initialValues={{
+              name: product?.nombre || '', 
+              price: product?.precio || 0 , 
+              category: product?.categoria || '',
+            }}
+            onSubmit={handleSubmitForm} // QUERY FROM USE-HOOK
+            validationSchema={SchemaProduct} // VALIDATION 
+          >
+            <Form>
+              <FormGroup>
+                <Label for="name">Name</Label>
+                <Field
+                  name="name"
+                  id="name"
+                  type="text"
+                  as={Input}
+                  className="mb-1"
+                />
+                <ErrorMessage name="name" component={ErrorOne} />
+              </FormGroup>
+        
+              <FormGroup>
+                <Label for="price">Price</Label>
+                <Field
+                  name="price"
+                  id="price"
+                  as={Input}
+                  type="number"
+                  className="mb-1"
+                />
+                <ErrorMessage name="price" component={ErrorOne} />
+              </FormGroup>
 
-      <Formik 
-        initialValues={{
-          name: product?.nombre || '', 
-          price: product?.precio || 0 , 
-          category: product?.categoria || '',
-        }}
-        onSubmit={handleSubmitForm} // QUERY FROM USE-HOOK
-        validationSchema={SchemaProduct} // VALIDATION 
-      >
-        <Form>
-          <div>
-            <label htmlFor="name">Name: 
-              <Field type="text" name="name" id="name" />
-              <ErrorMessage name='name' component={ ErrorOne }/>
-            </label>
-            <br />
-            <label htmlFor="price">Price: 
-              <Field type="number" name="price" id="price" />
-              <ErrorMessage name='price' component={ ErrorOne }/>
-            </label>
-            <br />
-               <label htmlFor="category">Category: 
-              <Field type="text" name="category" id="category" />
-              <ErrorMessage name='category' component={ ErrorOne }/>
-            </label>     
-          <br />
-          </div>
-          {/* ENVIAR */}
-          <button type="submit"
-            className='AddInstrument__button'> Send
-          </button>
+              <FormGroup>
+                <Label for="category">Category</Label>
+                <Field
+                  name="category"
+                  id="category"
+                  as={Input}
+                  type="text"
+                  className="mb-1"
+                />
+                <ErrorMessage name="category" component={ErrorOne} />
+              </FormGroup>
 
-        </Form>
 
-      </Formik>
-      <hr />
-      
-      <button type="submit"className='AddInstrument__button'> 
-            <Link to='/PageProduct'>
+          <Button type="submit" color="success" className="mt-3 me-3">
+            Send
+          </Button>
+
+          <Button color="secondary" className="mt-3">
+            <Link to="/PageProduct" className="text-light text-decoration-none">
               Back
             </Link>
-      </button>
-      
-    </div>
+          </Button>
+            </Form>
+          </Formik>
+          
+          {/* <Button color="secondary" className="mt-3">
+            <Link to="/PageProduct" className="text-light text-decoration-none">
+              Back
+            </Link>
+          </Button> */}
+        </Col>
+      </Row>      
+    </Container>
   ) 
 }
 

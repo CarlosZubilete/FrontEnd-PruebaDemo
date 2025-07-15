@@ -9,22 +9,20 @@ function Header(){
 
   return (
     <header className='header'>
-      <Navbar color="dark" dark expand="sm" >
+      <Navbar color="dark" dark fixed="top" expand="sm" >
         <NavbarBrand>
           Welcome to me web!
         </NavbarBrand>
         
         <NavbarToggler onClick={()=>{SetIsOpen(!isOpen)}}/>
-        <Collapse isOpen={isOpen}>
-          <Nav className="me-auto">
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ms-auto">
             <NavItem>
-              {/* <Link to='/' className='navBar__ul__li__a'>Home</Link> */}
               <NavLink>
                 <Link to='/' className='navBar__ul__li__a'>Home</Link> 
               </NavLink>
             </NavItem>
             <NavItem>
-              {/* <Link to='/PageProduct' className='navBar__ul__li__a'>Products</Link> */}
               <NavLink >
                 <Link to='/PageProduct' className='navBar__ul__li__a'>Products</Link>
               </NavLink>
