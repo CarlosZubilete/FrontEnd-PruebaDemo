@@ -1,19 +1,23 @@
 import { useEffect } from 'react';
 import { useNavigate , Link , useParams } from 'react-router-dom';
+import { Container , Row , Col , Button , Label , Input , FormGroup} from 'reactstrap';
 import { Formik, Form , Field , ErrorMessage} from 'formik';
 import { SchemaProduct } from '../schemas/schemaProduct';
-import { Container , Row , Col , Button , Label , Input , FormGroup} from 'reactstrap';
 import useNewProduct from '../hooks/useNewProducto';
 
 const ErrorOne = ({children}) => {
   return <span style={{fontSize:'.6rem', color:'red' , fontWeight:'bold'}}> {children} </span>
 }
 
+const ErrorBack = () => {
+  return <h2 style={{fontSize:'1.2rem', color:'red'}}>BackEnd says: "Error Bad Request" </h2>;
+}
+
 function NewProduct(){
   
   const params = useParams();
 
-  const { handleSubmitForm, success , product} = useNewProduct(params.id);
+  const { handleSubmitForm, success , product, error} = useNewProduct(params.id);
 
   // If everything is ok..
   const redirect = useNavigate();
@@ -29,6 +33,7 @@ function NewProduct(){
 
   return(
     <Container className='mt-5'>
+      <span>{error && <ErrorBack/>}</span>
       <Row>
         <Col sm={{size:8, offset:2}}>
           <hr />
@@ -43,6 +48,7 @@ function NewProduct(){
             onSubmit={handleSubmitForm} // QUERY FROM USE-HOOK
             validationSchema={SchemaProduct} // VALIDATION 
           >
+          {({isSubmitting}) =>
             <Form>
               <FormGroup>
                 <Label for="name">Name</Label>
@@ -80,24 +86,23 @@ function NewProduct(){
                 <ErrorMessage name="category" component={ErrorOne} />
               </FormGroup>
 
-
-          <Button type="submit" color="success" className="mt-3 me-3">
-            Send
-          </Button>
-
-          <Button color="secondary" className="mt-3">
-            <Link to="/PageProduct" className="text-light text-decoration-none">
-              Back
-            </Link>
-          </Button>
+              <Button type="submit" color="success" className="mt-3 me-3" 
+                disabled={isSubmitting}>
+                {(isSubmitting) ? ' Sending...' : 'Send'}
+              </Button>
+        
+              <Link to="/PageProduct" 
+                className={`text-light text-decoration-none ${isSubmitting ? 'disabled-link' : ''}`}
+                onClick={(e)=>{ if(isSubmitting) e.preventDefault() }}
+                >
+                <Button  color="secondary" className="mt-3" disabled={isSubmitting}>
+                Back
+                </Button>
+              </Link>
+                
             </Form>
-          </Formik>
-          
-          {/* <Button color="secondary" className="mt-3">
-            <Link to="/PageProduct" className="text-light text-decoration-none">
-              Back
-            </Link>
-          </Button> */}
+          }  
+        </Formik>
         </Col>
       </Row>      
     </Container>

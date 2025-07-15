@@ -4,16 +4,25 @@ import {  useEffect, useState } from "react";
 import productService from "../services/productService";
 
 
+async function saveProduct(id,values){
+  // dependiendo si hay un id agregamos el instrumento...
+  if(id){
+    return productService.editByID(id,values)
+  }
+  else{
+    return productService.create(values)
+  }
+}
 
 export default function useNewProduct(id){
 
   const[success,setSuccess] = useState(false);
   const[product,setProduct] = useState(null) // Declarate a box will fill out with product
+  const[error,setError] = useState(false)
 
-  const handleSubmitForm = async (values) => {
+  const handleSubmitForm = (values, {setSubmitting}) => {
     
     console.log(values);
-
 
     const payload = {
       nombre: values.name,
@@ -23,20 +32,34 @@ export default function useNewProduct(id){
       ventasitems: []
     };
 
-    try {
-      await productService.create(payload);
-      console.log('Producto guardado correctamente');
-      setSuccess(true);
-    } catch (error) {
-      console.error('Error al guardar producto:', error);
-      setSuccess(false); //
-    }
+    setSubmitting(true);
+    saveProduct(id,payload)
+      .then(()=>{
+        setTimeout(() => {
+          setSuccess(true);
+          setSubmitting(false);
+        }, 2500)
+      })
+      .catch(()=>{
+        setError(true)
+        setSubmitting(false);
+      })
+
+
+    // try {
+    //   await productService.create(payload);
+    //   console.log('Producto guardado correctamente');
+    //   setSuccess(true);
+    // } catch (error) {
+    //   console.error('Error al guardar producto:', error);
+    //   setSuccess(false); //
+    // }
   }
 
 
   useEffect(()=>{   
       if(id){
-      productService.FindById(id)  
+      productService.findById(id)  
         .then((data) => {
           setProduct(data);
         })
@@ -46,6 +69,6 @@ export default function useNewProduct(id){
     }
   },[id])
   
-  return { handleSubmitForm , success , product }
+  return { handleSubmitForm , success , product, error }
 
 }

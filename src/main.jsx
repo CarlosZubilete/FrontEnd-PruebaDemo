@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // Products
 import PageProduct from '@feature/products/page/PageProduct'
 import NewProduct from '@feature/products/components/NewProduct'
-import EditProduct from '@feature/products/components/EditProduct'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +15,7 @@ const router = createBrowserRouter([
        children:[
         {
           index: true,
-          element: <h1>Hi! I'm Index</h1>,
+          element: <h1 className="container mt-5 pt-4" >Hi! I'm Index</h1>,
         },
         {
           path:'/PageProduct',

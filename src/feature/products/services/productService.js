@@ -20,7 +20,7 @@ const productService = {
     })
     
   },
-  FindById: async(id) => {
+  findById: async(id) => {
     return axios.get(`http://localhost:5155/api/Productos/producto/${id}`)
       .then((response) =>{
         return response.data;
@@ -28,7 +28,14 @@ const productService = {
       .catch(() => {
 
       })
-  }
+  },
+  editByID: async (id,values) => {
+    return axios.patch(`http://localhost:5155/api/Productos/editar/${id.toString()}`,JSON.stringify(values),{
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  },
 }
 
 export default productService

@@ -20,8 +20,8 @@ function ListProduct({listaProductos}){
               category: product.categoria,
             }} />
             <hr /> 
-          <Link to={`/PageProduct/${product.id}/edit`}>
-            <button>Edit</button>
+          <Link to={`/PageProduct/${product.id}/edit`} >
+            <button className="btn btn-info mb-3">Edit</button>
           </Link>
           </li>)
       }

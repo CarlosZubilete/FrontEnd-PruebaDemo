@@ -1,40 +1,36 @@
-// import NavBar from "./NavBar";
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink  } from "reactstrap";
-import { Link } from 'react-router';
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
+import { Link } from 'react-router-dom'; // 
 import { useState } from "react";
 
-function Header(){
-
-  const[isOpen,SetIsOpen] = useState(false);
+function Header() {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className='header'>
-      <Navbar color="dark" dark fixed="top" expand="sm" >
-        <NavbarBrand>
-          Welcome to me web!
+    <header className="header">
+      <Navbar color="dark" dark expand="sm" fixed="top" className="px-3">
+        <NavbarBrand href="/" className="fw-bold">
+          Welcome to my web!
         </NavbarBrand>
-        
-        <NavbarToggler onClick={()=>{SetIsOpen(!isOpen)}}/>
+
+        <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
+
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="ms-auto">
+          <Nav className="ms-auto" navbar>
             <NavItem>
-              <NavLink>
-                <Link to='/' className='navBar__ul__li__a'>Home</Link> 
+              <NavLink tag={Link} to="/" className="text-light text-decoration-none me-3">
+                Home
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink >
-                <Link to='/PageProduct' className='navBar__ul__li__a'>Products</Link>
+              <NavLink tag={Link} to="/PageProduct" className="text-light text-decoration-none">
+                Products
               </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
-   
     </header>
-    
-  
-  )
+  );
 }
 
 export default Header;

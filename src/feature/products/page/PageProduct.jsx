@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import useProductList from "@products/hooks/useProductList"
 import ListProduct from "@products/components/ListProduct"
-import { Link } from "react-router-dom";
-
 // import useProductList from '../hooks/useProductList';
 // import ListProduct from '../components/ListProduct';
 
@@ -20,16 +18,18 @@ function PageProduct(){
   if(loading) return <h1>Cargando...</h1>
 
   return(
-    <div>
-      <h2>Products List</h2>
-      <button type="button"> 
-        <Link to='/new-product' className='navBar__ul__li__a'> Add Product</Link>
-      </button>
-      <hr />
-      <ListProduct listaProductos={listAll} />
-      <hr />
-     
-    </div>
+      <div className="container mt-5 pt-4">
+        <hr />
+        <h2>Products List</h2>
+          <Link to="/new-product" className="text-light text-decoration-none">    
+            <button type="button" className="btn btn-success mb-3">
+              Add Product
+            </button>
+          </Link>
+        <hr />
+        <ListProduct listaProductos={listAll} />
+        <hr />
+      </div>
   )
 }
 
