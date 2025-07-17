@@ -45,7 +45,7 @@ function NewProduct(){
   },[success])
 
 
-  if(params?.id && product == null) return <Loading />;
+  if(params?.id && product == null) return <Loading />
 
   return(
     <Container className='className="container mt-5 pt-4"'>

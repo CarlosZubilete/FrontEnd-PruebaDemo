@@ -3,13 +3,15 @@ import CardProduct from "@products/components/CardProduct"
 import { Link } from 'react-router';
 import { Button, Container, Row, Col } from "reactstrap";
 
+
 const BadRequest = () => (
   <div className="container text-center mt-5 pt-4" role="alert">
     <h2 className="text-danger fs-4">
-      <strong>¡Error!</strong> Could not connect to the server..
+      <strong>¡Error!</strong> There's any results.
     </h2>
   </div>
 );
+
 
 function ListProduct({listaProductos = [] }){
   
