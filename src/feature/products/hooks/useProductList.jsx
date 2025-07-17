@@ -6,16 +6,18 @@ import productService from '../services/productService';
 
   const[products,setProducts] = useState([]);
   const[loading,setLoading] = useState(true);
-  const[err,setErr] = useState(false);
+  const[error,setError] = useState(false);
 
   useEffect(()=>{
     productService.findAll()
     .then((data)=>{
-      setProducts(data)
-      //setProducts(Array.isArray(data) ? data : []); 
+      //setProducts(data);
+      setProducts(Array.isArray(data) ? data : []); 
+      //if(Array.isArray(data))
+      
     })
     .catch(()=>{
-      setErr(true);
+      setError(true);
     })
     .finally(()=>{
       setLoading(false);
@@ -24,7 +26,7 @@ import productService from '../services/productService';
       
   },[]);
 
-  return { products,  loading , err };
+  return { products,  loading , error };
 }
 
 export default useProductList;

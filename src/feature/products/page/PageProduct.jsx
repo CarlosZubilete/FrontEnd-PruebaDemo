@@ -5,17 +5,23 @@ import ListProduct from "@products/components/ListProduct"
 // import useProductList from '../hooks/useProductList';
 // import ListProduct from '../components/ListProduct';
 
+const Loading = () => (
+  <div className="container text-center mt-5 pt-4">
+    <div className="spinner-border text-primary" role="status"></div>
+    <p className="mt-3">Loading...</p>
+  </div>
+);
+
 function PageProduct(){
 
   const[listAll, setListAll] = useState([]);
-  const { products , loading , err } = useProductList();
+  const { products , loading  } = useProductList();
 
   useEffect(()=>{
     setListAll(products)
   },[products])
 
-  if(err) return <h1>Error</h1>
-  if(loading) return <h1>Cargando...</h1>
+  if(loading) return <Loading />
 
   return(
       <div className="container mt-5 pt-4">

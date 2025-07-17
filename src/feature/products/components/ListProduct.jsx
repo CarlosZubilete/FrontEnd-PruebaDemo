@@ -3,16 +3,20 @@ import CardProduct from "@products/components/CardProduct"
 import { Link } from 'react-router';
 import { Button, Container, Row, Col } from "reactstrap";
 
-function ListProduct({listaProductos}){
-//function ListProduct({listaProductos = [] }){
-  
+const BadRequest = () => (
+  <div className="container text-center mt-5 pt-4" role="alert">
+    <h2 className="text-danger fs-4">
+      <strong>¡Error!</strong> Could not connect to the server..
+    </h2>
+  </div>
+);
 
-  // if (listaProductos.length === 0) {
-  //   return <p>No hay productos para mostrar.</p>;
-  // }
+function ListProduct({listaProductos = [] }){
+  
   
   return(
     <Container className="mt-4">
+      {(listaProductos.length === 0) && <BadRequest />}
       <Row>
         {listaProductos.map((product) => 
           <Col key={product.id} sm="12" md="6" lg="4" className="mb-4">
@@ -40,24 +44,3 @@ function ListProduct({listaProductos}){
 
 export default ListProduct;
 
-
-/* 
-      {listaProductos.map((product) => 
-          <li className="listProduct__li" key={product.id}>
-            <CardProduct product={{
-              name: product.nombre,
-              price: product.precio,
-              category: product.categoria,
-      }} />
-
-      <Link to={`/PageProduct/${product.id}/edit`} >
-        <Button className="btn btn-info mt-3 me-3">Edit</Button>
-      </Link>
-          
-      <Link to={`/PageProduct/${product.id}/delete`} >
-        <Button className="btn btn-danger mt-3 me-3">Delete</Button>
-      </Link>
-          <hr />
-          </li> )
-      }
-*/

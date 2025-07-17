@@ -5,6 +5,7 @@ import { Formik, Form , Field , ErrorMessage} from 'formik';
 import { SchemaProduct } from '../schemas/schemaProduct';
 import useNewProduct from '../hooks/useNewProducto';
 
+// The component when use into the FORMIK
 const ErrorOne = ({children}) => {
   return <span style={{fontSize:'.6rem', color:'red' , fontWeight:'bold'}} 
   className="container mt-5 pt-4"> 
@@ -12,12 +13,21 @@ const ErrorOne = ({children}) => {
   </span>
 }
 
-const ErrorBack = () => {
-  return <h2 style={{fontSize:'1.2rem', color:'red'}} 
-    className="container mt-5 pt-4">
-      BackEnd says: "Error Bad Request" 
-    </h2>;
-}
+// If Something got wrong when connecting to the database.
+const ErrorBack = () => (
+  <div className="container text-center mt-5 pt-4" role="alert">
+    <h2 className="text-danger fs-4">
+      <strong>¡Error!</strong> The product could not be added.
+    </h2>
+  </div>
+);
+
+const Loading = () => (
+  <div className="container text-center mt-5 pt-4">
+    <div className="spinner-border text-primary" role="status"></div>
+    <p className="mt-3">Loading...</p>
+  </div>
+);
 
 function NewProduct(){
   
@@ -35,7 +45,7 @@ function NewProduct(){
   },[success])
 
 
-  if(params?.id && product == null) return <p>Cargando...</p>
+  if(params?.id && product == null) return <Loading />;
 
   return(
     <Container className='className="container mt-5 pt-4"'>
