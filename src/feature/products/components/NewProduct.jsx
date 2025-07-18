@@ -11,7 +11,7 @@ const ErrorOne = ({children}) => {
   className="container mt-5 pt-4"> 
     {children} 
   </span>
-}
+};
 
 // If Something got wrong when connecting to the database.
 const ErrorBack = () => (
